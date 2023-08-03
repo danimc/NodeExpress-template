@@ -2,38 +2,38 @@ const express = require('express')
 const cors = require('cors')
 
 class Server {
-  constructor() {
+  constructor () {
     this.app = express()
     this.port = process.env.PORT || 3000
 
-    //Endpoints Paths
-    this.initialPath = '/api/welcome'
+    // Endpoints Paths
+    this.usersPath = '/api/welcome'
 
-    //Middleware
+    // Middleware
     this.middleware()
 
     // add some database connection
 
-    //routes
+    // routes
     this.routes()
   }
 
-  middleware() {
+  middleware () {
     //  CORS
     this.app.use(cors())
 
-    //body reading
+    // body reading
     this.app.use(express.json())
 
-    //public directory
+    // public directory
     this.app.use(express.static('public'))
   }
 
-  routes() {
-    this.app.use(this.initialPath, require('../routes/initial'))
+  routes () {
+    this.app.use(this.usersPath, require('../routes/users'))
   }
 
-  listen() {
+  listen () {
     this.app.listen(this.port, () => {
       console.log('servidor corriendo en puerto', this.port)
     })
